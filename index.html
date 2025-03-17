@@ -1,344 +1,261 @@
-<style>
-  .column {
-    float: left;
-    width: 80px;
-  }
-
-  .row:after {
-    content: "";
-    display: table;
-    clear: both;
-  }
-
-  input {
-    width: 80px;
-  }
-</style>
-
 <!DOCTYPE html>
 <html>
   <head>
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="css/style.css">
     <title>Cash Out</title>
   </head>
   <body>
-    <form>
+    <button onclick="calculate()">Calculate</button>
+
+    <!-- Front Page -->
+    <div class="page" style="margin-top: 8px;">
+      <!-- Sales -->
+      <form name="sales">
+        <div class="row">
+          <div class="column-1"><label for="sales">Sales</label></div>
+          <div class="column-2"><input type="number" id="sales" name="sales" min="0"></div>
+        </div>
+      </form>
+
+      <hr class="divider">
+
+      <!-- Receipts -->
+      <form name="receipts">
+        <h4 style="margin-bottom: 10px;">Receipts:</h4>
+
+        <!-- VISA / VISA Wireless -->
+        <div class="row">
+          <div class="column-1"><label for="visa">VISA</label></div>
+          <div class="column-2"><input type="number" id="visa" name="visa" min="0"></div>
+
+          <div class="column-3"><label for="visa-wireless">VISA Wireless</label></div>
+          <div class="column-4"><input type="number" id="visa-wireless" name="visa-wireless" min="0"></div>
+        </div>
+
+        <!-- Debit / Debit Wireless -->
+        <div class="row">
+          <div class="column-1"><label for="debit">Debit</label></div>
+          <div class="column-2"><input type="number" id="debit" name="debit" min="0"></div>
+
+          <div class="column-3"><label for="debit-wireless">Debit Wireless</label></div>
+          <div class="column-4"><input type="number" id="debit-wireless" name="debit-wireless" min="0"></div>
+        </div>
+
+        <!-- MC / MC Wireless -->
+        <div class="row">
+          <div class="column-1"><label for="mc">M/C</label></div>
+          <div class="column-2"><input type="number" id="mc" name="mc" min="0"></div>
+
+          <div class="column-3"><label for="mc-wireless">M/C Wireless</label></div>
+          <div class="column-4"><input type="number" id="mc-wireless" name="mc-wireless" min="0"></div>
+        </div>
+
+        <!-- Amex / Amex Wireless -->
+        <div class="row">
+          <div class="column-1"><label for="amex">Amex</label></div>
+          <div class="column-2"><input type="number" id="amex" name="amex" min="0"></div>
+
+          <div class="column-3"><label for="amex-wireless">Amex Wireless</label></div>
+          <div class="column-4"><input type="number" id="amex-wireless" name="amex-wireless" min="0"></div>
+        </div>
+
+        <!-- GC / Other -->
+        <div class="row">
+          <div class="column-1"><label for="gift-card">G/C</label></div>
+          <div class="column-2"><input type="number" id="gift-card" name="gift-card" min="0"></div>
+
+          <div class="column-3"><label for="other-1">Other</label></div>
+          <div class="column-4"><input type="number" id="other-1" name="other-1" min="0"></div>
+        </div>
+
+        <!-- AR / Other -->
+        <div class="row">
+          <div class="column-1"><label for="receivable">A/R</label></div>
+          <div class="column-2"><input type="number" id="receivable" name="receivable" min="0"></div>
+
+          <div class="column-3"><label for="other-2">Other</label></div>
+          <div class="column-4"><input type="number" id="other-2" name="other-2" min="0"></div>
+        </div>
+
+        <h4 id="total-receipts" style="margin-top: 10px;">Total Receipts: __________</h4>
+      </form>
+
+      <hr class="divider">
+      <p id="calculation" style="margin-bottom: 10px;"></p>
+
+      <!-- Total Cash -->
+      <h4 id="total-cash">Total Cash: __________</h4>
+
       <div class="row">
-        <div class="column">
-          <label for="amount">Amount:</label><br><br>
-        </div>
-        <div class="column">
-          <input type="number" id="amount" name="amount" step="0.01" value="0"><br><br>
-        </div>
+        <div class="column-5" id="num-toonies"><p>____x2</p></div>
+        <div class="column" id="sum-toonies"><p>=&nbsp__________</p></div>
       </div>
 
       <div class="row">
-        <div class="column">
-          <label for="nickels">Nickels:</label><br>
-        </div>
-        <div class="column">
-          <input type="number" id="nickels" name="nickels" step="1"  min="0" value="0"><br>
-        </div>
+        <div class="column-5" id="num-fives"><p>____x5</p></div>
+        <div class="column" id="sum-fives"><p>=&nbsp__________</p></div>
       </div>
 
       <div class="row">
-        <div class="column">
-          <label for="dimes">Dimes:</label><br>
-        </div>
-        <div class="column">
-          <input type="number" id="dimes" name="dimes" step="1"  min="0" value="0"><br>
-        </div>
+        <div class="column-5" id="num-tens"><p>____x10</p></div>
+        <div class="column" id="sum-tens"><p>=&nbsp__________</p></div>
       </div>
 
       <div class="row">
-        <div class="column">
-          <label for="quarters">Quarters:</label><br>
-        </div>
-        <div class="column">
-          <input type="number" id="quarters" name="quarters" step="1"  min="0" value="0"><br>
-        </div>
+        <div class="column-5" id="num-twenties"><p>____x20</p></div>
+        <div class="column" id="sum-twenties"><p>=&nbsp__________</p></div>
       </div>
 
       <div class="row">
-        <div class="column">
-          <label for="loonies">Loonies:</label><br>
-        </div>
-        <div class="column">
-          <input type="number" id="loonies" name="loonies" step="1"  min="0" value="0"><br>
-        </div>
+        <div class="column-5" id="num-fifties"><p>____x50</p></div>
+        <div class="column" id="sum-fifties"><p>=&nbsp__________</p></div>
       </div>
 
       <div class="row">
-        <div class="column">
-          <label for="toonies">Toonies:</label><br><br>
-        </div>
-        <div class="column">
-          <input type="number" id="toonies" name="toonies" step="1"  min="0" value="0"><br><br>
-        </div>
+        <div class="column-5" id="num-hundreds"><p>____x100</p></div>
+        <div class="column" id="sum-hundreds"><p>=&nbsp__________</p></div>
       </div>
 
       <div class="row">
-        <div class="column">
-          <label for="fives">Fives:</label><br>
-        </div>
-        <div class="column">
-          <input type="number" id="fives" name="fives" step="1"  min="0" value="0"><br>
-        </div>
+        <div class="column-5" style="text-align: end;"><p>Coin&nbsp</p></div>
+        <div class="column" id="sum-coin"><p>=&nbsp__________</p></div>
       </div>
+    </div>
 
-      <div class="row">
-        <div class="column">
-          <label for="tens">Tens:</label><br>
+    <!-- Back Page -->
+    <div class="page">
+      <form name="tip-pool"></form>
+        <h4 style="margin-bottom: 10px;">Tip Pool</h4>
+
+        <p style="margin-bottom: 0px; margin-top: 20px;">Kitchen:</p>
+        <hr class="divider" style="margin-top: 0px;">
+
+        <!-- Food Sales -->
+        <label for="food-sales" style="margin-right: 5px;">Food Sales</label>
+        <input type="number" id="food-sales" name="food-sales" min="0">
+
+        <!-- Kitchen tips -->
+        <p id="kitchen-tips" style="margin-top: 10px;">5% of food sales = $__________</p>
+
+        <p style="margin-bottom: 0px; margin-top: 25px;">Bar:</p>
+        <hr class="divider" style="margin-top: 0px;">
+
+        <!-- Beer Sales -->
+        <div class="row">
+          <div class="column-3">
+            <label for="beer-sales" style="margin-right: 5px;">Beer Sales</label>
+          </div>
+          <div class="column-3">
+            <input type="number" id="beer-sales" name="beer-sales" min="0">
+          </div>
         </div>
-        <div class="column">
-          <input type="number" id="tens" name="tens" step="1"  min="0" value="0"><br>
+
+        <!-- Wine Sales -->
+        <div class="row">
+          <div class="column-3">
+            <label for="wine-sales" style="margin-right: 5px;">Wine Sales</label>
+          </div>
+          <div class="column-3">
+            <input type="number" id="wine-sales" name="wine-sales" min="0">
+          </div>
         </div>
-      </div>
 
-      <div class="row">
-        <div class="column">
-          <label for="twenties">Twenties:</label><br>
+        <!-- Liquor Sales -->
+        <div class="row">
+          <div class="column-3">
+            <label for="liquor-sales" style="margin-right: 5px;">Liquor Sales</label>
+          </div>
+          <div class="column-3">
+            <input type="number" id="liquor-sales" name="liquor-sales" min="0">
+          </div>
         </div>
-        <div class="column">
-          <input type="number" id="twenties" name="twenties" step="1"  min="0" value="0"><br>
+
+        <!-- Bar tips -->
+        <p id="bar-tips" style="margin-top: 10px;">3.5% of liquor & beverage = $__________</p>
+
+        <p style="margin-bottom: 0px; margin-top: 25px;">Host/Buss:</p>
+        <hr class="divider" style="margin-top: 0px;">
+
+        <!-- Host/Buss tips -->
+        <p id="host-buss-tips" style="margin-top: 10px;">1% of total sales = $__________</p>
+
+        <h4 id="total-tips" style="margin-bottom: 0px; margin-top: 25px;">TOTAL:</h4>
+        <hr class="divider" style="margin-top: 0px;">
+
+      </form>
+    </div>
+
+    <!-- Calculate Button -->
+    <button onclick="calculate()">Calculate</button>
+
+    <!-- Coin Calculator -->
+    <div class="page" style="margin-top: 30px;">
+      <form name="coins">
+        <h4 style="margin-bottom: 20px;">Coin Calculator &#40Optional&#41</h4>
+
+        <div class="row">
+          <div class="column-6"><label for="cash-amount">Total Cash</label></div>
+          <div class="column-4"><input type="number" id="cash-amount" name="cash-amount"></div>
         </div>
-      </div>
-
-      <div class="row">
-        <div class="column">
-          <label for="fifties">Fifties:</label><br>
+        <br>
+        <div class="row">
+          <div class="column-6"><label for="nickels">Nickels</label></div>
+          <div class="column-4"><input type="number" id="nickels" name="nickels" min="0"></div>
         </div>
-        <div class="column">
-          <input type="number" id="fifties" name="fifties" step="1"  min="0" value="0"><br>
+
+        <div class="row">
+          <div class="column-6"><label for="dimes">Dimes</label></div>
+          <div class="column-4"><input type="number" id="dimes" name="dimes" min="0"></div>
         </div>
-      </div>
 
-      <div class="row">
-        <div class="column">
-          <label for="hundreds">Hundreds:</label><br><br>
+        <div class="row">
+          <div class="column-6"><label for="quarters">Quarters</label></div>
+          <div class="column-4"><input type="number" id="quarters" name="quarters" min="0"></div>
         </div>
-        <div class="column">
-          <input type="number" id="hundreds" name="hundreds" step="1"  min="0" value="0"><br><br>
+
+        <div class="row">
+          <div class="column-6"><label for="loonies">Loonies</label></div>
+          <div class="column-4"><input type="number" id="loonies" name="loonies" min="0"></div>
         </div>
-      </div>
 
-      <div class="row">
-        <div class="column">
-          <button onclick="calculate()">Calculate</button>
+        <div class="row">
+          <div class="column-6"><label for="toonies">Toonies</label></div>
+          <div class="column-4"><input type="number" id="toonies" name="toonies" min="0"></div>
         </div>
-        <div class="column">
-          <button onclick="clearInput()">Clear</button>
+        <br>
+        <div class="row">
+          <div class="column-6"><label for="fives">Fives</label></div>
+          <div class="column-4"><input type="number" id="fives" name="fives" min="0"></div>
         </div>
-      </div>
-    </form>
 
-    <p id="result"></p>
+        <div class="row">
+          <div class="column-6"><label for="tens">Tens</label></div>
+          <div class="column-4"><input type="number" id="tens" name="tens" min="0"></div>
+        </div>
 
-    <script>
-      const coinNames = [
-        // Change
-        "nickels",
-        "dimes",
-        "quarters",
-        "loonies",
-        "toonies",
+        <div class="row">
+          <div class="column-6"><label for="twenties">Twenties</label></div>
+          <div class="column-4"><input type="number" id="twenties" name="twenties" min="0"></div>
+        </div>
 
-        // Bills
-        "fives",
-        "tens",
-        "twenties",
-        "fifties",
-        "hundreds"
-      ];
+        <div class="row">
+          <div class="column-6"><label for="fifties">Fifties</label></div>
+          <div class="column-4"><input type="number" id="fifties" name="fifties" min="0"></div>
+        </div>
 
-      const coinValues = [
-        // Change
-        0.05,
-        0.10,
-        0.25,
-        1.00,
-        2.00,
+        <div class="row">
+          <div class="column-6"><label for="hundreds">Hundreds</label></div>
+          <div class="column-4"><input type="number" id="hundreds" name="hundreds" min="0"></div>
+        </div>
+        <br>
 
-        // Bills
-          5,
-         10,
-         20,
-         50,
-        100
-      ];
+        <h4 id="total"></h4>
+      </form>
 
-      const cashBag = {
-        // Change
-        0.05: 0,
-        0.10: 0,
-        0.25: 0,
-        1.00: 0,
-        2.00: 0,
+      <button onclick="calculateCoins()">Calculate</button>
+    </div>
 
-        // Bills
-          5: 0,
-         10: 0,
-         20: 0,
-         50: 0,
-        100: 0
-      };
-
-      const takeHome = {
-        // Change
-        0.05: 0,
-        0.10: 0,
-        0.25: 0,
-        1.00: 0,
-        2.00: 0,
-
-        // Bills
-          5: 0,
-         10: 0,
-         20: 0,
-         50: 0,
-        100: 0
-      };
-
-      let amount = remaining = 0;
-
-      onLoad();
-
-      function onLoad(){
-        amount = localStorage.getItem("amount");
-        if (!amount) amount = 0;
-        
-        let amountElement = document.getElementById("amount");
-        amountElement.value = amount;
-
-        let input = localStorage.getItem("input");
-        if (input){
-          input = JSON.parse(input);
-
-          for (let i = 0; i < coinNames.length; i++){
-            const coinName  = coinNames [i];
-            const coinValue = coinValues[i];
-
-            let element = document.getElementById(coinName);
-            element.value = input[coinValue];
-          }
-        }
-
-        let result = localStorage.getItem("result");
-        if (!result) result = ``;
-
-        let resultElement = document.getElementById("result");
-        resultElement.innerHTML = result;
-      }
-
-      function putInBag(){
-        for (let i = 0; i < coinValues.length; i++) {
-          const coinValue = coinValues[i];
-          const quantity  = takeHome[coinValue];
-
-          for (let q = 0; q < quantity; q++){
-            if (remaining < 0) break;
-            remaining = Math.round((remaining - coinValue) * 100) / 100;
-
-            cashBag [coinValue] += 1;
-            takeHome[coinValue] -= 1;
-          }
-        }
-      }
-
-      function takeFromBag(){
-        for (let i = coinValues.length - 1; i >= 0; i--) {
-          const coinValue = coinValues[i];
-          const quantity  = cashBag[coinValue];
-
-          for (let q = 0; q < quantity; q++){
-            if (-remaining < coinValue) break;
-            remaining = Math.round((remaining + coinValue) * 100) / 100;
-
-            cashBag [coinValue] -= 1;
-            takeHome[coinValue] += 1;
-          }
-        }
-      }
-
-      function getSum(bag){
-        let sum = 0;
-
-        for (coinValue in bag) {
-          const quantity = bag[coinValue];
-          sum += coinValue * quantity;
-        }
-
-        return Math.round(sum * 100) / 100;
-      }
-      
-      function parseInput(){
-        amount = parseFloat(document.getElementById("amount").value);
-        if (isNaN(amount)) amount = 0;
-
-        remaining = amount;
-
-        for (let i = 0; i < coinNames.length; i++){
-          const coinName  = coinNames [i];
-          const coinValue = coinValues[i];
-
-          let quantity = parseInt(document.getElementById(coinName).value);
-          if (isNaN(quantity)) quantity = 0;
-
-          takeHome[coinValue] = quantity;
-        }
-
-        localStorage.setItem("amount", amount);
-        localStorage.setItem("input", JSON.stringify(takeHome));
-      }
-
-      function calculate(){
-        parseInput();
-        const total = getSum(takeHome);
-
-        putInBag();
-        if (remaining < 0) takeFromBag();
-
-        displayResult(total);
-      }
-
-      function displayResult(total){
-        let result = `TOTAL: $${total.toFixed(2)}<br><br>`;
-
-        if (remaining > 0){
-          result += `There is not enough money in your cash bag to make $${amount.toFixed(2)}`;
-          result += `<br>You need $${remaining.toFixed(2)}`;
-        }else{
-          let cashBagResult = takeHomeResult = ``;
-
-          for (let i = 0; i < coinNames.length; i++){
-            const coinName  = coinNames [i];
-            const coinValue = coinValues[i];
-
-            cashBagResult  += `${coinName}: ${cashBag [coinValue]}<br>`;
-            takeHomeResult += `${coinName}: ${takeHome[coinValue]}<br>`;
-          }
-
-          result += `Going into cash bag: `;
-          result += `$${getSum(cashBag).toFixed(2)}<br><br>`;
-          result +=  `${cashBagResult}<br>`;
-
-          result += `Taking home: `;
-          result += `$${getSum(takeHome).toFixed(2)}<br><br>`;
-          result +=  `${takeHomeResult}<br>`;
-
-          if (remaining < 0) result += `You are owed $${-remaining.toFixed(2)}`;
-        }
-        
-        localStorage.setItem("result", result);
-      }
-    
-      function clearInput(){
-        for (coinValue in takeHome) takeHome[coinValue] = 0;
-
-        localStorage.setItem("amount", 0);
-        localStorage.setItem("result", "");
-        localStorage.setItem("input", JSON.stringify(takeHome));
-      }
-    </script>
+    <script src="js/script.js"></script>
   </body>
 </html>
