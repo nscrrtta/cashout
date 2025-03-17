@@ -98,7 +98,7 @@ function calculateTipPool(){
     element.innerHTML = '5% of food sales = $' + string;
 
     // Bar
-    tips = getValue('beer-sales') + getValue('wine-sales') + getValue('liquor-sales');
+    tips = getValue('beer-sales') + getValue('wine-sales') + getValue('liquor-sales') + getValue('beverage-sales');
     tips = Math.ceil(tips * 3.5 / 100);
     total += tips;
     
