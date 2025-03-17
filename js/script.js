@@ -88,7 +88,7 @@ function calculateTipPool(){
     total = 0;
 
     // Kitchen
-    tips = Math.ceil(getValue('food-sales') * 5 / 100);
+    tips = Math.round(getValue('food-sales') * 5 / 100);
     total += tips;
 
     if (tips > 0) string = '' + tips;
@@ -99,7 +99,7 @@ function calculateTipPool(){
 
     // Bar
     tips = getValue('beer-sales') + getValue('wine-sales') + getValue('liquor-sales') + getValue('beverage-sales');
-    tips = Math.ceil(tips * 3.5 / 100);
+    tips = Math.round(tips * 3.5 / 100);
     total += tips;
     
     if (tips > 0) string = '' + tips;
@@ -109,7 +109,7 @@ function calculateTipPool(){
     element.innerHTML = '3.5% of liquor & beverage = $' + string;
     
     // Host/Buss
-    tips = Math.ceil(getValue('sales') / 100);
+    tips = Math.round(getValue('sales') / 100);
     total += tips;
 
     if (tips > 0) string = '' + tips;
