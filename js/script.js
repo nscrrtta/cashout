@@ -260,7 +260,7 @@ function updateCashLines(cashBag){
     }
 
     element = document.getElementById('sum-coin');
-    element.innerHTML = '= ' + underlineNumber(coin.toFixed(2), 11);
+    element.innerHTML = '= ' + underlineNumber(coin.toFixed(2), 10);
 
     if (totalCash > 0){
         element = document.getElementById('total-cash');
