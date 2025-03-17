@@ -1,0 +1,70 @@
+.page {
+  border-style: solid;
+  margin-bottom: 8px;
+  margin-right: 8px;
+  padding: 15px;
+  width: 360px;
+}
+
+.column-1 {
+  float: left;
+  width: 45px;
+}
+
+.column-2 {
+  float: left;
+  width: 100px;
+}
+
+.column-3 {
+  float: left;
+  width: 105px;
+}
+
+.column-4 {
+  float: left;
+  width: 100px;
+}
+
+.column-5 {
+  float: left;
+  width: 69px;
+}
+
+.column-6 {
+  float: left;
+  width: 80px;
+}
+
+.row {
+  margin: 2px;
+}
+
+.row:after {
+  content: "";
+  display: table;
+  clear: both;
+}
+
+input {
+  width: 80px;
+}
+
+.divider {
+  width: 360px;
+  margin-left: 0;
+  margin-top: 10px;
+  margin-bottom: 10px;;
+}
+
+h4 {
+  margin: 0;
+}
+
+p {
+  margin: 0;
+}
+
+.text-underline {
+  text-decoration: underline;
+}
