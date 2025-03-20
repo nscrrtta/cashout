@@ -13,8 +13,8 @@
       <!-- Sales -->
       <form name="sales">
         <div class="row">
-          <div class="column-1"><label for="sales">Sales</label></div>
-          <div class="column-2"><input type="number" id="sales" name="sales" min="0"></div>
+          <div class="column-2"><label for="sales">Sales</label></div>
+          <div class="column-4"><input type="number" id="sales" name="sales" min="0"></div>
         </div>
       </form>
 
@@ -26,100 +26,129 @@
 
         <!-- VISA / VISA Wireless -->
         <div class="row">
-          <div class="column-1"><label for="visa">VISA</label></div>
-          <div class="column-2"><input type="number" id="visa" name="visa" min="0"></div>
+          <div class="column-2"><label for="visa">VISA</label></div>
+          <div class="column-4"><input type="number" id="visa" name="visa" min="0"></div>
 
-          <div class="column-3"><label for="visa-wireless">VISA Wireless</label></div>
+          <div class="column-5"><label for="visa-wireless">VISA Wireless</label></div>
           <div class="column-4"><input type="number" id="visa-wireless" name="visa-wireless" min="0"></div>
         </div>
 
         <!-- Debit / Debit Wireless -->
         <div class="row">
-          <div class="column-1"><label for="debit">Debit</label></div>
-          <div class="column-2"><input type="number" id="debit" name="debit" min="0"></div>
+          <div class="column-2"><label for="debit">Debit</label></div>
+          <div class="column-4"><input type="number" id="debit" name="debit" min="0"></div>
 
-          <div class="column-3"><label for="debit-wireless">Debit Wireless</label></div>
+          <div class="column-5"><label for="debit-wireless">Debit Wireless</label></div>
           <div class="column-4"><input type="number" id="debit-wireless" name="debit-wireless" min="0"></div>
         </div>
 
         <!-- MC / MC Wireless -->
         <div class="row">
-          <div class="column-1"><label for="mc">M/C</label></div>
-          <div class="column-2"><input type="number" id="mc" name="mc" min="0"></div>
+          <div class="column-2"><label for="mc">M/C</label></div>
+          <div class="column-4"><input type="number" id="mc" name="mc" min="0"></div>
 
-          <div class="column-3"><label for="mc-wireless">M/C Wireless</label></div>
+          <div class="column-5"><label for="mc-wireless">M/C Wireless</label></div>
           <div class="column-4"><input type="number" id="mc-wireless" name="mc-wireless" min="0"></div>
         </div>
 
         <!-- Amex / Amex Wireless -->
         <div class="row">
-          <div class="column-1"><label for="amex">Amex</label></div>
-          <div class="column-2"><input type="number" id="amex" name="amex" min="0"></div>
+          <div class="column-2"><label for="amex">Amex</label></div>
+          <div class="column-4"><input type="number" id="amex" name="amex" min="0"></div>
 
-          <div class="column-3"><label for="amex-wireless">Amex Wireless</label></div>
+          <div class="column-5"><label for="amex-wireless">Amex Wireless</label></div>
           <div class="column-4"><input type="number" id="amex-wireless" name="amex-wireless" min="0"></div>
         </div>
 
         <!-- GC / Other -->
         <div class="row">
-          <div class="column-1"><label for="gift-card">G/C</label></div>
-          <div class="column-2"><input type="number" id="gift-card" name="gift-card" min="0"></div>
+          <div class="column-2"><label for="gift-card">G/C</label></div>
+          <div class="column-4"><input type="number" id="gift-card" name="gift-card" min="0"></div>
 
-          <div class="column-3"><label for="other-1">Other</label></div>
+          <div class="column-5"><label for="other-1">Other</label></div>
           <div class="column-4"><input type="number" id="other-1" name="other-1" min="0"></div>
         </div>
 
         <!-- AR / Other -->
         <div class="row">
-          <div class="column-1"><label for="receivable">A/R</label></div>
-          <div class="column-2"><input type="number" id="receivable" name="receivable" min="0"></div>
+          <div class="column-2"><label for="receivable">A/R</label></div>
+          <div class="column-4"><input type="number" id="receivable" name="receivable" min="0"></div>
 
-          <div class="column-3"><label for="other-2">Other</label></div>
+          <div class="column-5"><label for="other-2">Other</label></div>
           <div class="column-4"><input type="number" id="other-2" name="other-2" min="0"></div>
         </div>
 
-        <h4 id="total-receipts" style="margin-top: 10px;">Total Receipts: __________</h4>
+        <div class="row">
+          <div class="column" style="float:left; width:auto;">
+            <h4 style="margin-top: 10px;">Total Receipts: $&nbsp</h4>
+          </div>
+          <div class="col-underline-lg-2" style="margin-top: 10px;" id="total-receipts">
+            &nbsp
+          </div>
+        </div>
+        
       </form>
 
       <hr class="divider">
       <p id="calculation" style="margin-bottom: 10px;"></p>
 
       <!-- Total Cash -->
-      <h4 id="total-cash">Total Cash: __________</h4>
-
-      <div class="row">
-        <div class="column-5" id="num-toonies"><p>____x2</p></div>
-        <div class="column" id="sum-toonies"><p>=&nbsp__________</p></div>
+      <div class="row" style="margin-bottom: 10px;">
+        <div class="column" style="float:left; width:auto;">
+          <h4>Total Cash: $&nbsp</h4>
+        </div>
+        <div class="col-underline-lg-2" id="total-cash">
+          &nbsp
+        </div>
       </div>
 
       <div class="row">
-        <div class="column-5" id="num-fives"><p>____x5</p></div>
-        <div class="column" id="sum-fives"><p>=&nbsp__________</p></div>
+        <div class="col-underline-sm" id="num-toonies">&nbsp</div>
+        <div class="column-1">x2</div>
+        <div class="column-0">=</div>
+        <div class="col-underline-lg" id="sum-toonies">&nbsp</div>
       </div>
 
       <div class="row">
-        <div class="column-5" id="num-tens"><p>____x10</p></div>
-        <div class="column" id="sum-tens"><p>=&nbsp__________</p></div>
+        <div class="col-underline-sm" id="num-fives">&nbsp</div>
+        <div class="column-1">x5</div>
+        <div class="column-0">=</div>
+        <div class="col-underline-lg" id="sum-fives">&nbsp</div>
       </div>
 
       <div class="row">
-        <div class="column-5" id="num-twenties"><p>____x20</p></div>
-        <div class="column" id="sum-twenties"><p>=&nbsp__________</p></div>
+        <div class="col-underline-sm" id="num-tens">&nbsp</div>
+        <div class="column-1">x10</div>
+        <div class="column-0">=</div>
+        <div class="col-underline-lg" id="sum-tens">&nbsp</div>
       </div>
 
       <div class="row">
-        <div class="column-5" id="num-fifties"><p>____x50</p></div>
-        <div class="column" id="sum-fifties"><p>=&nbsp__________</p></div>
+        <div class="col-underline-sm" id="num-twenties">&nbsp</div>
+        <div class="column-1">x20</div>
+        <div class="column-0">=</div>
+        <div class="col-underline-lg" id="sum-twenties">&nbsp</div>
       </div>
 
       <div class="row">
-        <div class="column-5" id="num-hundreds"><p>____x100</p></div>
-        <div class="column" id="sum-hundreds"><p>=&nbsp__________</p></div>
+        <div class="col-underline-sm" id="num-fifties">&nbsp</div>
+        <div class="column-1">x50</div>
+        <div class="column-0">=</div>
+        <div class="col-underline-lg" id="sum-fifties">&nbsp</div>
       </div>
 
       <div class="row">
-        <div class="column-5" style="text-align: end;"><p>Coin&nbsp</p></div>
-        <div class="column" id="sum-coin"><p>=&nbsp__________</p></div>
+        <div class="col-underline-sm" id="num-hundreds">&nbsp</div>
+        <div class="column-1">x100</div>
+        <div class="column-0">=</div>
+        <div class="col-underline-lg" id="sum-hundreds">&nbsp</div>
+      </div>
+
+      <div class="row">
+        <div class="column-1">&nbsp</div>
+        <div class="column-1" style="text-align: end;">Coin&nbsp</div>
+        <div class="column-0">=</div>
+        <div class="col-underline-lg" id="sum-coin">&nbsp</div>
       </div>
     </div>
 
@@ -136,61 +165,110 @@
         <input type="number" id="food-sales" name="food-sales" min="0">
 
         <!-- Kitchen tips -->
-        <p id="kitchen-tips" style="margin-top: 10px;">5% of food sales = $__________</p>
-
+        <div class="row" style="margin-top: 10px;">
+          <div class="column" style="float:left; width:auto;">
+            <p>5% of food sales = $&nbsp</p>
+          </div>
+          <div class="col-underline-lg" id="kitchen-tips">
+            &nbsp
+          </div>
+        </div>
+ 
         <p style="margin-bottom: 0px; margin-top: 25px;">Bar:</p>
         <hr class="divider" style="margin-top: 0px;">
 
-        <!-- Beer Sales -->
+        <!-- Liquor Sales -->
         <div class="row">
-          <div class="column-3">
-            <label for="beer-sales" style="margin-right: 5px;">Beer Sales</label>
+          <div class="column-6">
+            <label for="liquor-sales" style="margin-right: 5px;">Liquor Sales</label>
           </div>
-          <div class="column-3">
-            <input type="number" id="beer-sales" name="beer-sales" min="0">
+          <div class="column-5">
+            <input type="number" id="liquor-sales" name="liquor-sales" min="0">
           </div>
         </div>
 
         <!-- Wine Sales -->
         <div class="row">
-          <div class="column-3">
+          <div class="column-6">
             <label for="wine-sales" style="margin-right: 5px;">Wine Sales</label>
           </div>
-          <div class="column-3">
+          <div class="column-5">
             <input type="number" id="wine-sales" name="wine-sales" min="0">
           </div>
         </div>
 
-        <!-- Liquor Sales -->
+        <!-- Beer Sales -->
         <div class="row">
-          <div class="column-3">
-            <label for="liquor-sales" style="margin-right: 5px;">Liquor Sales</label>
+          <div class="column-6">
+            <label for="beer-sales" style="margin-right: 5px;">Beer Sales</label>
           </div>
-          <div class="column-3">
-            <input type="number" id="liquor-sales" name="liquor-sales" min="0">
+          <div class="column-5">
+            <input type="number" id="beer-sales" name="beer-sales" min="0">
+          </div>
+        </div>
+
+        <!-- Premium Beer Sales -->
+        <div class="row">
+          <div class="column-6">
+            <label for="premium-beer-sales" style="margin-right: 5px;">Premium Beer</label>
+          </div>
+          <div class="column-5">
+            <input type="number" id="premium-beer-sales" name="beer-sales" min="0">
+          </div>
+        </div>
+
+        <!-- Wholesale Beer Sales -->
+        <div class="row">
+          <div class="column-6">
+            <label for="wholesale-beer-sales" style="margin-right: 5px;">Wholesale Beer</label>
+          </div>
+          <div class="column-5">
+            <input type="number" id="wholesale-beer-sales" name="beer-sales" min="0">
           </div>
         </div>
 
         <!-- Beverage Sales -->
         <div class="row">
-          <div class="column-3">
+          <div class="column-6">
             <label for="beverage-sales" style="margin-right: 5px;">Beverage Sales</label>
           </div>
-          <div class="column-3">
+          <div class="column-5">
             <input type="number" id="beverage-sales" name="beverage-sales" min="0">
           </div>
         </div>
 
         <!-- Bar tips -->
-        <p id="bar-tips" style="margin-top: 10px;">3.5% of liquor & beverage = $__________</p>
+        <div class="row" style="margin-top: 10px;">
+          <div class="column" style="float:left; width:auto;">
+            <p>3.5% of liquor & beverage sales = $&nbsp</p>
+          </div>
+          <div class="col-underline-lg" id="bar-tips">
+            &nbsp
+          </div>
+        </div>
 
         <p style="margin-bottom: 0px; margin-top: 25px;">Host/Buss:</p>
         <hr class="divider" style="margin-top: 0px;">
 
         <!-- Host/Buss tips -->
-        <p id="host-buss-tips" style="margin-top: 10px;">1% of total sales = $__________</p>
+        <div class="row" style="margin-top: 5px;">
+          <div class="column" style="float:left; width:auto;">
+            <p>1% of total sales = $&nbsp</p>
+          </div>
+          <div class="col-underline-lg" id="host-buss-tips">
+            &nbsp
+          </div>
+        </div>
 
-        <h4 id="total-tips" style="margin-bottom: 0px; margin-top: 25px;">TOTAL:</h4>
+        <div class="row" style="margin-top: 25px;">
+          <div class="column" style="float:left; width:auto;">
+            <h4>TOTAL: $</h4>
+          </div>
+          <div class="column" style="float:left; width:auto; font-weight: bold;" id="total-tips">
+            &nbsp
+          </div>
+        </div>
+
         <hr class="divider" style="margin-top: 0px;">
 
       </form>
@@ -205,57 +283,57 @@
         <h4 style="margin-bottom: 20px;">Coin Calculator &#40Optional&#41</h4>
 
         <div class="row">
-          <div class="column-6"><label for="cash-amount">Total Cash</label></div>
+          <div class="column-3"><label for="cash-amount">Total Cash</label></div>
           <div class="column-4"><input type="number" id="cash-amount" name="cash-amount"></div>
         </div>
         <br>
         <div class="row">
-          <div class="column-6"><label for="nickels">Nickels</label></div>
+          <div class="column-3"><label for="nickels">Nickels</label></div>
           <div class="column-4"><input type="number" id="nickels" name="nickels" min="0"></div>
         </div>
 
         <div class="row">
-          <div class="column-6"><label for="dimes">Dimes</label></div>
+          <div class="column-3"><label for="dimes">Dimes</label></div>
           <div class="column-4"><input type="number" id="dimes" name="dimes" min="0"></div>
         </div>
 
         <div class="row">
-          <div class="column-6"><label for="quarters">Quarters</label></div>
+          <div class="column-3"><label for="quarters">Quarters</label></div>
           <div class="column-4"><input type="number" id="quarters" name="quarters" min="0"></div>
         </div>
 
         <div class="row">
-          <div class="column-6"><label for="loonies">Loonies</label></div>
+          <div class="column-3"><label for="loonies">Loonies</label></div>
           <div class="column-4"><input type="number" id="loonies" name="loonies" min="0"></div>
         </div>
 
         <div class="row">
-          <div class="column-6"><label for="toonies">Toonies</label></div>
+          <div class="column-3"><label for="toonies">Toonies</label></div>
           <div class="column-4"><input type="number" id="toonies" name="toonies" min="0"></div>
         </div>
         <br>
         <div class="row">
-          <div class="column-6"><label for="fives">Fives</label></div>
+          <div class="column-3"><label for="fives">Fives</label></div>
           <div class="column-4"><input type="number" id="fives" name="fives" min="0"></div>
         </div>
 
         <div class="row">
-          <div class="column-6"><label for="tens">Tens</label></div>
+          <div class="column-3"><label for="tens">Tens</label></div>
           <div class="column-4"><input type="number" id="tens" name="tens" min="0"></div>
         </div>
 
         <div class="row">
-          <div class="column-6"><label for="twenties">Twenties</label></div>
+          <div class="column-3"><label for="twenties">Twenties</label></div>
           <div class="column-4"><input type="number" id="twenties" name="twenties" min="0"></div>
         </div>
 
         <div class="row">
-          <div class="column-6"><label for="fifties">Fifties</label></div>
+          <div class="column-3"><label for="fifties">Fifties</label></div>
           <div class="column-4"><input type="number" id="fifties" name="fifties" min="0"></div>
         </div>
 
         <div class="row">
-          <div class="column-6"><label for="hundreds">Hundreds</label></div>
+          <div class="column-3"><label for="hundreds">Hundreds</label></div>
           <div class="column-4"><input type="number" id="hundreds" name="hundreds" min="0"></div>
         </div>
         <br>
