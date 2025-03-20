@@ -1,23 +1,21 @@
-.page {
-  border-style: solid;
-  margin-bottom: 8px;
-  padding: 5px;
-  width: 360px;
+.column-0 {
+  float: left;
+  width: 15px;
 }
 
 .column-1 {
   float: left;
-  width: 45px;
+  width: 40px;
 }
 
 .column-2 {
   float: left;
-  width: 100px;
+  width: 45px;
 }
 
 .column-3 {
   float: left;
-  width: 105px;
+  width: 80px;
 }
 
 .column-4 {
@@ -27,12 +25,32 @@
 
 .column-5 {
   float: left;
-  width: 69px;
+  width: 105px;
 }
 
 .column-6 {
   float: left;
+  width: 110px;
+}
+
+.col-underline-sm {
+  float: left;
+  width: 40px;
+  border-bottom: 1px solid black;
+  text-align: center;
+}
+
+.col-underline-lg {
+  float: left;
   width: 80px;
+  border-bottom: 1px solid black;
+}
+
+.col-underline-lg-2 {
+  float: left;
+  width: 80px;
+  border-bottom: 1.5px solid black;
+  font-weight: bold;
 }
 
 .row {
@@ -45,15 +63,22 @@
   clear: both;
 }
 
-input {
-  width: 80px;
-}
-
 .divider {
   width: 350px;
   margin-left: 5;
   margin-top: 10px;
   margin-bottom: 10px;;
+}
+
+.page {
+  border-style: solid;
+  margin-bottom: 8px;
+  padding: 5px;
+  width: 360px;
+}
+
+input {
+  width: 80px;
 }
 
 h4 {
@@ -62,8 +87,4 @@ h4 {
 
 p {
   margin: 0;
-}
-
-.text-underline {
-  text-decoration: underline;
 }
