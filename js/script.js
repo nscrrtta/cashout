@@ -30,30 +30,30 @@ const coinValues = [
     100
 ];
 
-let cash = remaining = 0;
-
 function calculate(){
     clearCashLines();
 
-    sales = getValue('sales');
-    rcpts = calculateReceipts();
-    tips = calculateTipPool();
+    let sales = getValue('sales');
+    let rcpts = calculateReceipts();
+    let tips  = calculateTipPool();
 
-    cash = sales - rcpts + 51 + tips;
+    let cash = sales - rcpts + 51 + tips;
     cash = Math.round(cash * 100) / 100;
 
     element = document.getElementById('calculation');
-    element.innerHTML = `$${sales.toFixed(2)} - $${rcpts.toFixed(2)} + $51 + $${tips} = $${cash.toFixed(2)}`;
+    element.innerHTML = `${sales} - ${rcpts} + 51 + ${tips} = ${cash}`;
 
-    element = document.getElementById('total-cash');
-    element.innerHTML = 'Total Cash: $' + cash.toFixed(2);
+    if (cash > 0){
+        element = document.getElementById('total-cash');
+        element.innerHTML = cash;
 
-    element = document.getElementById('cash-amount');
-    element.value = cash.toFixed(2);
+        element = document.getElementById('cash-amount');
+        element.value = cash;
+    }
 }
 
 function calculateReceipts(){
-    total = 0;
+    let total = 0;
 
     total += getValue('visa');
     total += getValue('visa-wireless');
@@ -75,68 +75,60 @@ function calculateReceipts(){
 
     total = Math.round(total * 100) / 100;
 
-    if (total > 0) string = '$' + total.toFixed(2);
-    else string = '__________';
-
     element = document.getElementById('total-receipts');
-    element.innerHTML = 'Total Receipts: ' + string;
+    element.innerHTML = total;
 
     return total;
 }
 
 function calculateTipPool(){
-    total = 0;
+    let total = 0;
 
     // Kitchen
     tips = Math.round(getValue('food-sales') * 5 / 100);
     total += tips;
 
-    if (tips > 0) string = '' + tips;
-    else string = '__________';
-
     element = document.getElementById('kitchen-tips');
-    element.innerHTML = '5% of food sales = $' + string;
+    element.innerHTML = tips;
 
     // Bar
-    tips = getValue('beer-sales') + getValue('wine-sales') + getValue('liquor-sales') + getValue('beverage-sales');
+    tips =  getValue('liquor-sales');
+    tips += getValue('wine-sales');
+    tips += getValue('beer-sales');
+    tips += getValue('premium-beer-sales');
+    tips += getValue('wholesale-beer-sales');
+    tips += getValue('beverage-sales');
+    
     tips = Math.round(tips * 3.5 / 100);
     total += tips;
-    
-    if (tips > 0) string = '' + tips;
-    else string = '__________';
 
     element = document.getElementById('bar-tips');
-    element.innerHTML = '3.5% of liquor & beverage = $' + string;
+    element.innerHTML = tips;
     
     // Host/Buss
     tips = Math.round(getValue('sales') / 100);
     total += tips;
 
-    if (tips > 0) string = '' + tips;
-    else string = '__________';
-
     element = document.getElementById('host-buss-tips');
-    element.innerHTML = '1% of total sales = $' + string;
+    element.innerHTML = tips;
 
     // Total
     element = document.getElementById('total-tips');
-
-    if (total > 0) element.innerHTML = `TOTAL: $${total}`;
-    else element.innerHTML = `TOTAL:`;
+    element.innerHTML = total;
 
     return total;
 }
 
 function getValue(id){
     element = document.getElementById(id);
-    value = parseFloat(element.value);
+    let value = parseFloat(element.value);
 
     if (!value) return 0;
     else return value;
 }
 
 function calculateCoins(){
-    cash = remaining = getValue('cash-amount');
+    const target = getValue('cash-amount');
 
     const cashBag = {
         // Change
@@ -154,117 +146,77 @@ function calculateCoins(){
         100: 0
     };
     
-    const takeHome = {
-        // Change
-        0.05: 0,
-        0.10: 0,
-        0.25: 0,
-        1.00: 0,
-        2.00: 0,
-
-        // Bills
-        5:  0,
-        10: 0,
-        20: 0,
-        50: 0,
-        100: 0
-    };
-
-    parseInput(takeHome);
-
-    total = getSum(takeHome);
+    const total = parseInput(cashBag);
     element = document.getElementById('total');
     element.innerHTML = `TOTAL: $${total.toFixed(2)}<br><br>`;
 
-    putInBag(takeHome, cashBag);
-    if (remaining < 0) takeFromBag(takeHome, cashBag);
-    if (remaining <= 0) updateCashLines(cashBag);
+    takeFromBag(cashBag, total - target);
+    updateCashLines(cashBag);
 }
 
-function parseInput(takeHome){
+function parseInput(cashBag){
+    let sum = 0;
+
     for (i = 0; i < coinValues.length; i++) {
         const coinName  = coinNames [i];
         const coinValue = coinValues[i];
-        takeHome[coinValue] = getValue(coinName);
+
+        const quantity = getValue(coinName);
+
+        cashBag[coinValue] = quantity;
+        sum += coinValue * quantity;
     }
+
+    return sum;
 }
 
-function putInBag(takeHome, cashBag){
-    for (i = 0; i < coinValues.length; i++) {
-        const coinValue = coinValues[i];
-        const quantity  = takeHome[coinValue];
+function takeFromBag(cashBag, amount){
+    amount = Math.round(amount * 100) / 100;
 
-        for (q = 0; q < quantity; q++){
-            if (remaining < 0) break;
-            remaining = Math.round((remaining - coinValue) * 100) / 100;
-
-            cashBag [coinValue] += 1;
-            takeHome[coinValue] -= 1;
-        }
-    }
-}
-
-function takeFromBag(takeHome, cashBag){
     for (i = coinValues.length - 1; i >= 0; i--) {
         const coinValue = coinValues[i];
         const quantity  = cashBag[coinValue];
 
         for (q = 0; q < quantity; q++){
-            if (-remaining < coinValue) break;
-            remaining = Math.round((remaining + coinValue) * 100) / 100;
-
+            if (amount < coinValue) break;
+            amount = Math.round((amount - coinValue) * 100) / 100;
             cashBag [coinValue] -= 1;
-            takeHome[coinValue] += 1;
         }
     }
 }
 
-function getSum(bag){
-    let sum = 0;
-  
-    for (coinValue in bag) {
-        const quantity = bag[coinValue];
-        sum += coinValue * quantity;
-    }
-  
-    return Math.round(sum * 100) / 100;
-}
-
-function underlineNumber(num, stringSize){
-    if (num == 0) return '_'.repeat(stringSize);
-
-    num = num.toString();
-    string = num + '_'.repeat(stringSize - num.length);
-    return `<span class="text-underline">${string}</span>`;
-}
-
 function updateCashLines(cashBag){
-    coin = totalCash = 0;
+    let totalCoin = 0;
+    let totalCash = 0;
 
     for (i = 0; i < coinValues.length; i++) {
         const coinName  = coinNames [i];
         const coinValue = coinValues[i];
 
-        quantity = cashBag[coinValue];
+        const quantity = cashBag[coinValue];
+        if (quantity == 0) continue;
+
         totalCash += quantity * coinValue;
 
         if (coinValue >= 2){
             element = document.getElementById('num-'+coinName);
-            element.innerHTML = underlineNumber(quantity, 4) + `x${coinValue}`;
+            element.innerHTML = quantity;
 
             element = document.getElementById('sum-'+coinName);
-            element.innerHTML = '= ' + underlineNumber(quantity * coinValue, 10);
+            element.innerHTML = quantity * coinValue;
         }else{
-            coin += quantity * coinValue;
-        } 
+            totalCoin += quantity * coinValue;
+        }
     }
 
-    element = document.getElementById('sum-coin');
-    element.innerHTML = '= ' + underlineNumber(coin.toFixed(2), 10);
+    if (totalCoin > 0){
+        element = document.getElementById('sum-coin');
+        element.innerHTML = totalCoin.toFixed(2);
+    }
 
     if (totalCash > 0){
         element = document.getElementById('total-cash');
-        element.innerHTML = 'Total Cash: $' + cash.toFixed(2);
+        element.innerHTML = totalCash.toFixed(2);
     }
 }
 
@@ -278,13 +230,13 @@ function clearCashLines(){
 
         if (coinValue >= 2){
             element = document.getElementById('num-'+coinName);
-            element.innerHTML = '_'.repeat(4) + `x${coinValue}`;
+            element.innerHTML = '&nbsp';
 
             element = document.getElementById('sum-'+coinName);
-            element.innerHTML = '= ' + '_'.repeat(10);
+            element.innerHTML = '&nbsp';
         }
     }
 
     element = document.getElementById('sum-coin');
-    element.innerHTML = '= ' + '_'.repeat(10);
+    element.innerHTML = '&nbsp';
 }
